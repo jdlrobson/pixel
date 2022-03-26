@@ -1,0 +1,13 @@
+{
+  "name": "pixeltest",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "reference": "docker-compose run pixeltest reference --config backstop.config.js",
+    "approve": "docker-compose run pixeltest approve --config backstop.config.js",
+    "test": "docker-compose run pixeltest test --config backstop.config.js"
+  },
+  "author": "Nick Ray",
+  "license": "ISC"
+}

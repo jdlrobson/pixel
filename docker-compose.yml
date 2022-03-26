@@ -1,0 +1,51 @@
+version: '3.7'
+
+volumes:
+  dbdata:
+  mwcode:
+services:
+  mediawiki:
+    build:
+      context: .
+      dockerfile: Dockerfile-mediawiki
+    env_file:
+      - '.env'
+    environment:
+      COMPOSER_CACHE_DIR: '/var/www/html/w/cache/composer'
+      MW_SERVER: 'http://localhost:${MW_DOCKER_PORT:-8080}'
+      MW_SCRIPT_PATH: '/w'
+      MW_DBPATH: '/var/www/html/w/cache/sqlite'
+      MW_DBTYPE: 'sqlite'
+      MW_LANG: 'en'
+      MW_USER: '${MEDIAWIKI_USER:-Admin}'
+      MW_PASS: '${MEDIAWIKI_PASSWORD:-dockerpass}'
+      MW_SITENAME: 'MediaWiki'
+      MW_LOG_DIR: /var/www/html/w/cache
+      XDEBUG_CONFIG: '${XDEBUG_CONFIG}'
+      XDEBUG_ENABLE: '${XDEBUG_ENABLE:-true}'
+      XHPROF_ENABLE: '${XHPROF_ENABLE:-true}'
+    volumes:
+      - mwcode:/var/www/html/w
+      - ./LocalSettings.php:/var/www/html/w/LocalSettings.php
+  mediawiki-web:
+    image: docker-registry.wikimedia.org/dev/buster-apache2:1.0.0-s1
+    user: "${MW_DOCKER_UID}:${MW_DOCKER_GID}"
+    ports:
+      - "${MW_DOCKER_PORT:-8080}:8080"
+    env_file:
+      - '.env'
+    environment:
+      MW_LOG_DIR: /var/www/html/w/cache
+    volumes:
+      - mwcode:/var/www/html/w
+  database:
+    image: mariadb
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - dbdata:/var/lib/mysql
+  pixeltest:
+    image: backstopjs/backstopjs
+    working_dir: /usr/src/app
+    volumes:
+      - ./app:/usr/src/app
