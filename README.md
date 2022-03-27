@@ -1,13 +1,18 @@
-# pixel
+# Pixel
 
 🚨 **Pixel is new and experimental. Only use if you are feeling dangerous.** 🚨
 
-Pixel is a visual regression tool intended to help you replace much of your
-manual testing with automated tests that catch web ui regressions when
-developing MediaWiki.
+Pixel is a visual regression tool that helps you replace manual testing with
+automated tests that catch web ui regressions when developing MediaWiki.
 
-## Install BackstopJS now
+It uses [BackstopJS](https://github.com/garris/BackstopJS) under the hood.
+
+## Quick Start
 
 ```sh
-$ git clone https://github.com/nicholasray/pixel.git
+$ git clone https://github.com/nicholasray/pixel.git && cd pixel
+```
+
+```sh
+$ cd pixel
 ```
