@@ -8,11 +8,16 @@ module.exports = {
     },
     {
       "label": "tablet",
-      "width": 1024,
+      "width": 720,
       "height": 768
     },
     {
       "label": "desktop",
+      "width": 1000,
+      "height": 900
+    },
+    {
+      "label": "desktop-wide",
       "width": 1792,
       "height": 900 
     }

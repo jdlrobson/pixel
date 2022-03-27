@@ -23,6 +23,15 @@ RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/Eve
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/WikimediaEvents" extensions/WikimediaEvents
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/TemplateStyles" extensions/TemplateStyles
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/Scribunto" extensions/Scribunto
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/BetaFeatures" extensions/BetaFeatures
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/CentralNotice" extensions/CentralNotice
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/Gadgets" extensions/Gadgets
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/GlobalPreferences" extensions/GlobalPreferences
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/MobileFrontendContentProvider" extensions/MobileFrontendContentProvider
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/Parsoid" extensions/Parsoid
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/QuickSurveys" extensions/QuickSurveys
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/RelatedArticles" extensions/RelatedArticles
+RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/VisualEditor" extensions/VisualEditor
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/schemas/event/secondary" extensions/secondary
 
 RUN composer update

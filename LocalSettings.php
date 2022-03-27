@@ -136,11 +136,101 @@ wfLoadSkin( 'Vector' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
+# Content Provider used to show articles from enwiki. Can be helpful when trying to see how
+# production articles look locally, but be aware that there are some gotchas
+# with using this that don't perfectly match the production environment. Use at
+# your own discretion!
+$wgMFContentProviderClass = "MobileFrontendContentProviders\\MwApiContentProvider";
+wfLoadExtension( 'MobileFrontendContentProvider' );
+
+# Show the enwiki logo.
+$wgLogos = [
+	'icon' => 'https://en.wikipedia.org/static/images/mobile/copyright/wikipedia.png',
+	'tagline' => [
+		'src' => 'https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en.svg',
+		'width' => 117,
+		'height' => 13,
+	],
+	'1x' => 'https://en.wikipedia.org/static/images/project-logos/enwiki.png',
+	'2x' => 'https://en.wikipedia.org/static/images/project-logos/enwiki-2x.png',
+	'wordmark' => [
+		'src' => 'https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en.svg',
+		'width' => 119,
+		'height' => 18,
+	],
+];
+
+// T152540: Dictates how the parser escapes section ids. Mirrors how it works
+// on enwiki.
+$wgFragmentMode = [ 'html5', 'legacy' ];
+
+wfLoadExtension( 'Cite' );
+wfLoadExtension( 'MobileFrontend' );
+wfLoadSkin( 'MinervaNeue' );
+
 wfLoadExtension( 'TemplateStyles' );
 wfLoadExtension( 'Scribunto' );
 $wgScribuntoDefaultEngine = 'luastandalone';
 $wgUseInstantCommons = true;
 
-// wfLoadExtension( 'QuickInstantCommons' );
+# Popups
+$wgPopupsGateway = 'restbaseHTML';
+$wgPopupsRestGatewayEndpoint = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+$wgArticlePath = "/wiki/$1";
+wfLoadExtension( 'Popups' );
 
+# Echo
+wfLoadExtension( 'Echo' );
+
+# EventLogging
+# Note: In order for EventLoggging to pick up your local schemas, make sure
+# EventLogging/devserver/eventgate.config.yaml `schema_base_uris` point to:
+# - ../repositories/secondary/jsonschema
+wfLoadExtension( 'EventLogging' );
+# EventLogging requires EventBus
+wfLoadExtension( 'EventBus' );
+# EventLogging requires EventStreamConfig
+wfLoadExtension( 'EventStreamConfig' );
+wfLoadExtension( 'WikimediaEvents' );
+
+# Universal Language Selector
+$wgULSPosition = 'interlanguage';
+$wgULSCompactLanguageLinksBetaFeature = false;
+wfLoadExtension( 'UniversalLanguageSelector' );
+
+# Useful when testing language variants
+$wgUsePigLatinVariant = true;
+
+# GlobalPreferences
+$wgSharedTables = [ 'user' ]; // Note that 'user_properties' is not included.
+wfLoadExtension( 'GlobalPreferences' );
+
+# Gadgets
+wfLoadExtension( 'Gadgets' );
+
+wfLoadExtension( 'BetaFeatures' );
+
+$wgHooks['SkinTemplateNavigation::Universal'][] = function ( $skinTemplate, &$links ) {
+        $links['user-menu']['extension'] = [
+                'link-class' => [ 'ext' ],
+                'class' => [ 'ext' ],
+                'text' => 'I am an extension',
+                'href' => 'https://mediawiki.org'
+        ];
+};
+
+// wfLoadExtension( 'Parsoid', "vendor/wikimedia/parsoid/extension.json" );
+// wfLoadExtension( 'VisualEditor' );
+// // Needed to prevent: RuntimeException: strtolower() doesn't work -- please set the locale to C or a UTF-8 variant such as C.UTF-8.
+// $wgShellLocale = "C";
+// $wgDefaultUserOptions['visualeditor-enable'] = 1;
+// $wgEnableRestAPI = true;
+// $wgGroupPermissions['user']['writeapi'] = true;
+
+// Show new sidebar table of contents.
+$wgVectorTableOfContents = [
+	"default" => true,
+];
+
+// Show sidebar for anonymous users;
 $wgVectorDefaultSidebarVisibleForAnonymousUser = true;
