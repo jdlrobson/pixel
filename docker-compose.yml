@@ -39,12 +39,14 @@ services:
     volumes:
       - mwcode:/var/www/html/w
   database:
-    image: mariadb
+    build:
+      context: .
+      dockerfile: Dockerfile-database
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
       - dbdata:/var/lib/mysql
-  pixeltest:
+  pixel:
     image: backstopjs/backstopjs
     working_dir: /usr/src/app
     volumes:
