@@ -219,13 +219,32 @@ $wgHooks['SkinTemplateNavigation::Universal'][] = function ( $skinTemplate, &$li
         ];
 };
 
-// wfLoadExtension( 'Parsoid', "vendor/wikimedia/parsoid/extension.json" );
-// wfLoadExtension( 'VisualEditor' );
-// // Needed to prevent: RuntimeException: strtolower() doesn't work -- please set the locale to C or a UTF-8 variant such as C.UTF-8.
-// $wgShellLocale = "C";
-// $wgDefaultUserOptions['visualeditor-enable'] = 1;
-// $wgEnableRestAPI = true;
-// $wgGroupPermissions['user']['writeapi'] = true;
+wfLoadExtension( 'VisualEditor' );
+$PARSOID_INSTALL_DIR = 'vendor/wikimedia/parsoid'; # bundled copy
+
+// For developers: ensure Parsoid is executed from $PARSOID_INSTALL_DIR,
+// (not the version included in mediawiki-core by default)
+// Must occur *before* wfLoadExtension()
+if ( $PARSOID_INSTALL_DIR !== 'vendor/wikimedia/parsoid' ) {
+    AutoLoader::$psr4Namespaces += [
+        // Keep this in sync with the "autoload" clause in
+        // $PARSOID_INSTALL_DIR/composer.json
+        'Wikimedia\\Parsoid\\' => "$PARSOID_INSTALL_DIR/src",
+    ];
+}
+
+wfLoadExtension( 'Parsoid', "$PARSOID_INSTALL_DIR/extension.json" );
+
+# Manually configure Parsoid
+$wgVisualEditorParsoidAutoConfig = false;
+$wgParsoidSettings = [
+    'useSelser' => true,
+    'rtTestMode' => false,
+    'linting' => false,
+];
+$wgVirtualRestConfig['modules']['parsoid'] = [
+    'url' => 'http://host.docker.internal:8282' . $wgScriptPath . '/rest.php',
+];
 
 // Show new sidebar table of contents.
 $wgVectorTableOfContents = [

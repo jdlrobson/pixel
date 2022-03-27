@@ -32,6 +32,7 @@ RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/Par
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/QuickSurveys" extensions/QuickSurveys
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/RelatedArticles" extensions/RelatedArticles
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/extensions/VisualEditor" extensions/VisualEditor
+RUN git -C extensions/VisualEditor submodule update --init
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/schemas/event/secondary" extensions/secondary
 
 RUN composer update
