@@ -29,6 +29,14 @@ module.exports = {
       "label": "Main_Page",
       "url": "http://mediawiki-web:8080/wiki/Main_Page"
     },
+    {
+      "label": "Test",
+      "url": "http://mediawiki-web:8080/wiki/Test"
+    },
+    {
+      "label": "Tree",
+      "url": "http://mediawiki-web:8080/wiki/Tree"
+    },
   ],
   "paths": {
     "bitmaps_reference": "backstop_data/bitmaps_reference",
