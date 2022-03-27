@@ -6,7 +6,8 @@
   "scripts": {
     "reference": "docker-compose exec mediawiki bash ./update-mediawiki.sh && docker-compose run pixel reference --config backstop.config.js",
     "approve": "docker-compose run pixel approve --config backstop.config.js",
-    "test": "docker-compose run pixel test --config backstop.config.js"
+    "test": "docker-compose run pixel test --config backstop.config.js",
+    "test:all": "npm run reference && npm run test"
   },
   "author": "Nick Ray",
   "license": "ISC"

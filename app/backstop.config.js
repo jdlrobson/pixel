@@ -1,3 +1,5 @@
+const HOST = "http://mediawiki-web:8080";
+
 module.exports = {
   "id": "MediaWiki",
   "viewports": [
@@ -27,15 +29,19 @@ module.exports = {
   "scenarios": [
     {
       "label": "Main_Page",
-      "url": "http://mediawiki-web:8080/wiki/Main_Page"
+      "url": `${HOST}/wiki/Main_Page`
     },
     {
       "label": "Test",
-      "url": "http://mediawiki-web:8080/wiki/Test"
+      "url": `${HOST}/wiki/Test`
+    },
+    {
+      "label": "Test?action=History",
+      "url": `${HOST}/w/index.php?title=Test&action=history`
     },
     {
       "label": "Tree",
-      "url": "http://mediawiki-web:8080/wiki/Tree"
+      "url": `${HOST}/wiki/Tree`
     },
   ],
   "paths": {
