@@ -46,4 +46,5 @@ Thumbs.db
 .vscode
 
 app/backstop_data/bitmaps_test
+app/backstop_data/bitmaps_reference
 app/backstop_data/html_report

@@ -6,5 +6,9 @@ time for i in . extensions/*/ skins/*/; do
 	git -C "$i" submodule update --init
 done
 
+# Update core's composer dependencies
+composer install
+composer update
+
 # Update the database schema.
 php maintenance/update.php
