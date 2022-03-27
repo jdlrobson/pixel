@@ -1,5 +1,9 @@
 FROM docker-registry.wikimedia.org/dev/buster-php72-fpm:2.0.0-s1
 
+# Install git review to enable git checkout by patch id.
+RUN apt-get update
+RUN apt-get -y install git-review
+
 WORKDIR /var/www/html
 
 RUN git clone --depth=1 "https://gerrit.wikimedia.org/r/mediawiki/core.git" w

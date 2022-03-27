@@ -1,5 +1,7 @@
 FROM mariadb
 
-COPY ./backup.tar .
+COPY ./database.tar .
 
-RUN tar xvf backup.tar
+RUN tar xvf database.tar
+
+RUN rm database.tar
