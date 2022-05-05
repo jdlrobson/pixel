@@ -17,8 +17,8 @@ const tests = [
 		path: '/wiki/Special:BlankPage'
 	},
 	{
-		label: 'Special:RecentChanges (#vector-2022, no max width, #sidebar-closed)',
-		path: '/wiki/Special:RecentChanges'
+		label: 'Special:SpecialPages (#vector-2022, no max width, #sidebar-closed)',
+		path: '/wiki/Special:SpecialPages'
 	},
 	{
 		label: 'Special:BlankPage with user menu open (#vector-2022, #logged-in, #userMenu-open)',
