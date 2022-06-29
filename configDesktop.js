@@ -1,4 +1,6 @@
 const BASE_URL = process.env.MW_SERVER;
+const PIXEL_HTML_OUTPUT_DIRECTORY = process.env.PIXEL_HTML_OUTPUT_DIRECTORY;
+
 const {
 	VIEWPORT_PHONE,
 	VIEWPORT_TABLET,
@@ -148,13 +150,13 @@ module.exports = {
 	scenarios,
 	paths: {
 		// eslint-disable-next-line camelcase
-		bitmaps_reference: 'report/reference-screenshots-desktop',
+		bitmaps_reference: `${PIXEL_HTML_OUTPUT_DIRECTORY}/reference-screenshots-desktop`,
 		// eslint-disable-next-line camelcase
-		bitmaps_test: 'report/test-screenshots-desktop',
+		bitmaps_test: `${PIXEL_HTML_OUTPUT_DIRECTORY}/test-screenshots-desktop`,
 		// eslint-disable-next-line camelcase
 		engine_scripts: 'src/engine-scripts',
 		// eslint-disable-next-line camelcase
-		html_report: 'report/desktop',
+		html_report:  `${PIXEL_HTML_OUTPUT_DIRECTORY}/desktop`,
 		// eslint-disable-next-line camelcase
 		ci_report: 'report/ci-report',
 		// eslint-disable-next-line camelcase

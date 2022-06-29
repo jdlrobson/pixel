@@ -1,4 +1,5 @@
 const configDesktop = require( './configDesktop.js' );
+const PIXEL_HTML_OUTPUT_DIRECTORY = process.env.PIXEL_HTML_OUTPUT_DIRECTORY;
 
 const BASE_URL = process.env.MW_SERVER;
 
@@ -127,10 +128,10 @@ module.exports = Object.assign( {}, configDesktop, {
 	scenarios,
 	paths: Object.assign( {}, configDesktop.paths, {
 		// eslint-disable-next-line camelcase
-		bitmaps_reference: 'report/reference-screenshots-echo',
+		bitmaps_reference: `${PIXEL_HTML_OUTPUT_DIRECTORY}/reference-screenshots-echo`,
 		// eslint-disable-next-line camelcase
-		bitmaps_test: 'report/test-screenshots-echo',
+		bitmaps_test: `${PIXEL_HTML_OUTPUT_DIRECTORY}/test-screenshots-echo`,
 		// eslint-disable-next-line camelcase
-		html_report: 'report/echo'
+		html_report: `${PIXEL_HTML_OUTPUT_DIRECTORY}/echo`
 	} )
 } );

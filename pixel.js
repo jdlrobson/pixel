@@ -144,6 +144,13 @@ async function processCommand( type, opts ) {
 		fs.writeFileSync( `${__dirname}/context.json`, JSON.stringify( context ) );
 		const configFile = getGroupConfig( group );
 
+		if ( opts.path ) {
+			const path = opts.path;
+			configFile.bitmaps_reference = `${path}/reference-screenshots`;
+			configFile.bitmaps_test = `${path}/test-screenshots`;
+			configFile.html_report = path;
+		}
+
 		// Start docker containers.
 		await batchSpawn.spawn(
 			'docker',
@@ -212,6 +219,10 @@ function setupCli() {
 		'--reset-db',
 		'Reset the database after running a test group. This will destroy all data that is currently in the database.'
 	] );
+	const pathOpt = /** @type {const} */ ( [
+		'--path',
+		'Set an optional path to decide where to output files.'
+	] );
 
 	program
 		.name( 'pixel.js' )
@@ -224,6 +235,7 @@ function setupCli() {
 		.option( ...changeIdOpt )
 		.option( ...groupOpt )
 		.option( ...resetDbOpt )
+		.option( ...pathOpt )
 		.action( ( opts ) => {
 			processCommand( 'reference', opts );
 		} );
@@ -235,6 +247,7 @@ function setupCli() {
 		.option( ...changeIdOpt )
 		.option( ...groupOpt )
 		.option( ...resetDbOpt )
+		.option( ...pathOpt )
 		.action( ( opts ) => {
 			processCommand( 'test', opts );
 		} );
